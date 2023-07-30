@@ -23,8 +23,8 @@ If you're facing any issues with this script, you can still change the hosts fil
 2. Do Ctrl+O
 3. Navigate to C:\Windows\System32\drivers\etc
 4. Now edit the host file and remove those following lines:
-   127.0.0.1 sessionserver.mojang.com
-   127.0.0.1 authserver.mojang.com
+   1. 127.0.0.1 sessionserver.mojang.com
+   2. 127.0.0.1 authserver.mojang.com
 5. Hit Ctrl+S (Save) and now you're good to go!
    
 This script simply automates the process making it much quicker.
