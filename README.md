@@ -26,6 +26,7 @@ If you're facing any issues with this script, you can still change the hosts fil
    1. 127.0.0.1 sessionserver.mojang.com
    2. 127.0.0.1 authserver.mojang.com
 5. Hit Ctrl+S (Save) and now you're good to go!
-   
+# Note
 This script simply automates the process making it much quicker.
+
 The script also performs a takeown on the file to prevent permission issues, which is then reverted afterwards to the original owner of the file (e.g SYSTEM).
