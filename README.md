@@ -29,7 +29,7 @@ If you're facing any issues with this script, you can fix the problem manually b
 4. Now open the hosts file and look for the following lines.
    1. x.x.x.x sessionserver.mojang.com
    2. x.x.x.x authserver.mojang.com
-   3. x.x.x.x launchermeta.mojang.com
+   3. x.x.x.x launchermeta.mojang.com <br>
       **The x.x.x.x could be any ip, commonly 127.0.0.1, if not, it could be a virus** <br>
       **/!\ Delete any other lines that countain the word "Mojang" or "Minecraft"**
 5. Once you've found them, make sure to delete them.
