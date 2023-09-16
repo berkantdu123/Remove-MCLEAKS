@@ -6,7 +6,7 @@ This script reverts any modification made by MCLeaks/EasyMC. We've had many comp
 
 **"Failed to login: The authentification servers are currently down for maintenance"**
 
-MCLeaks/EasyMC change the authentication servers from Mojang's to theirs preventing users from logging in into their normal accounts. This could also be caused from malwares that middlemans the mojang servers and steals accounts. To repair this, this script cancels out the modifications made by any software on the hosts file located at `C:\Windows\System32\drivers\etc`
+MCLeaks/EasyMC change the authentication servers from Mojang's to theirs preventing users from logging in into their normal accounts. This could also be caused from malwares that middlemans the Mojang's servers and steals accounts. To repair this, this script cancels out the modifications made by any software on the hosts file located at `C:\Windows\System32\drivers\etc`
 This script simply removes the three lines that prevent users from logging in, those are examples and the script automatically detects if other ones exist:
 ### "x.x.x.x sessionserver.mojang.com"
 ### "x.x.x.x authserver.mojang.com"
