@@ -6,12 +6,12 @@ This script reverts any modification made by MCLeaks/EasyMC. We've had many comp
 
 **"Failed to login: The authentification servers are currently down for maintenance"**
 
-MCLeaks/EasyMC change the authentication servers from Mojang's to theirs preventing users from logging in into their normal accounts. To repair this, this script cancels out the modifications made by the software on the hosts file located at `C:\Windows\System32\drivers\etc`
-This script simply removes the three lines that prevent users from logging in:
-### "127.0.0.1 sessionserver.mojang.com"
-### "127.0.0.1 authserver.mojang.com"
-### "127.0.0.1 launchermeta.mojang.com"
-
+MCLeaks/EasyMC change the authentication servers from Mojang's to theirs preventing users from logging in into their normal accounts. This could also be caused from malwares that middlemans the mojang servers and steals accounts. To repair this, this script cancels out the modifications made by any software on the hosts file located at `C:\Windows\System32\drivers\etc`
+This script simply removes the three lines that prevent users from logging in, those are examples and the script automatically detects if other ones exist:
+### "x.x.x.x sessionserver.mojang.com"
+### "x.x.x.x authserver.mojang.com"
+### "x.x.x.x launchermeta.mojang.com"
+### THE SCRIPT AUTOMATICALLY REMOVES THE LINES WITH ANY IPS
 # Usage
 
 ## Automatic Mode (Script in this GitHub)
@@ -27,13 +27,15 @@ If you're facing any issues with this script, you can fix the problem manually b
 2. Press Ctrl+O on your keyboard.
 3. Navigate to `C:\Windows\System32\drivers\etc`.
 4. Now open the hosts file and look for the following lines.
-   1. 127.0.0.1 sessionserver.mojang.com
-   2. 127.0.0.1 authserver.mojang.com
-   3. 127.0.0.1 launchermeta.mojang.com
+   1. x.x.x.x sessionserver.mojang.com
+   2. x.x.x.x authserver.mojang.com
+   3. x.x.x.x launchermeta.mojang.com
+      **The x.x.x.x could be any ip, commonly 127.0.0.1, if not, it could be a virus**
+      **/!\ Delete any other lines that countain the word "Mojang" or "Minecraft"**
 5. Once you've found them, make sure to delete them.
 **MAKE SURE TO SAVE THE FILE AND RESTART YOUR COMPUTER FOR THE CHANGES TO TAKE PLACE**
 
-If you see other lines containing the word "mojang" make sure to delete them!
+*If you see other lines containing the word "mojang" make sure to delete them!*
 
 6. Hit Ctrl+S (Save) and now you're good to go!
 
