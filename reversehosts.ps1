@@ -1,90 +1,63 @@
 # Define the path to the hosts file
 $hostsFilePath = "$env:windir\System32\drivers\etc\hosts"
 
-# Function to get the short path (8.3 filename) of a given path
-function Get-ShortPath {
-    param (
-        [string]$path
-    )
-    $shortPath = Get-Item $path | ForEach-Object { $_.GetShortPathName() }
-    return $shortPath
-}
-
-# Function to take ownership of the file using takeown command-line utility
-function Take-Ownership {
-    param (
-        [string]$path
-    )
-    try {
-        $shortPath = Get-ShortPath -path $path
-        & takeown.exe /F "$shortPath" /A /R /D Y | Out-Null
-        Write-Output "Ownership successfully taken."
-    }
-    catch {
-        Write-Output "Failed to take ownership: $_"
-        return $false
-    }
-    return $true
-}
-
-# Function to revert ownership to its original state using icacls command-line utility
-function Revert-Ownership {
-    param (
-        [string]$path
-    )
-    try {
-        $shortPath = Get-ShortPath -path $path
-        & icacls.exe "$shortPath" /setowner Administrators /T /C | Out-Null
-        Write-Output "Ownership successfully reverted."
-    }
-    catch {
-        Write-Output "Failed to revert ownership: $_"
-        return $false
-    }
-    return $true
-}
-
-# Function to remove specific lines from the file
+# Function to remove lines containing a specific pattern using regex
 function Remove-HostsLines {
     param (
         [string]$path,
-        [string[]]$linesToRemove
+        [string]$pattern
     )
     try {
+        # Capture the original owner
+        $originalOwner = (Get-Item "$path").GetAccessControl().Owner
+
+        # Take ownership of the hosts file
+        & icacls.exe "$path" /setowner Administrators /T /C | Out-Null
+
+        Write-Host "Changed ownership to" (Get-Item "$path").GetAccessControl().Owner
+
+        # Get the content of the hosts file
         $content = Get-Content $path
-        $modifiedContent = $content | Where-Object { $_ -notmatch ($linesToRemove -join '|') }
+
+        # Remove lines matching the pattern using regex
+        $modifiedContent = $content | Where-Object { $_ -notmatch $pattern }
+
+        # Write the modified content back to the hosts file
         $modifiedContent | Set-Content $path
-        Write-Output "Hosts file modified successfully."
+
+        Write-Host "Hosts file modified successfully."
     }
     catch {
-        Write-Output "Failed to modify the hosts file: $_"
+        Write-Host "Failed to modify the hosts file: $_"
         return $false
     }
+
+    # Revert ownership to its original state
+    try {
+        & icacls.exe "$path" /setowner $originalOwner | Out-Null
+        Write-host "Ownership changed back to "(Get-Item "$path").GetAccessControl().Owner
+        Write-Host "Ownership successfully reverted."
+    }
+    catch {
+        Write-Host "Failed to revert ownership: $_"
+        return $false
+    }
+
     return $true
 }
 
 # Main script
 try {
-    # Take ownership of the hosts file
-    if (!(Take-Ownership -path $hostsFilePath)) {
-        throw "Failed to take ownership."
-    }
+    # Define the pattern to match lines
+    $pattern = "mojang"
 
-    # Lines to remove
-    $linesToRemove = @("127.0.0.1 sessionserver.mojang.com", "127.0.0.1 authserver.mojang.com", "127.0.0.1 launchermeta.mojang.com")
-
-    # Remove lines from the hosts file
-    if (!(Remove-HostsLines -path $hostsFilePath -linesToRemove $linesToRemove)) {
+    # Remove lines matching the pattern from the hosts file
+    if (!(Remove-HostsLines -path $hostsFilePath -pattern $pattern)) {
         throw "Failed to remove lines from the hosts file."
     }
 
-    # Revert ownership to its original state
-    if (!(Revert-Ownership -path $hostsFilePath)) {
-        throw "Failed to revert ownership."
-    }
-
-    Write-Output "Script executed successfully."
+    Write-Host "Script executed successfully."
 }
 catch {
-    Write-Output "An error occurred: $_"
+    Write-Host "An error occurred: $_"
 }
