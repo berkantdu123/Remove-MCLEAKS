@@ -71,7 +71,7 @@ try {
     }
 
     # Lines to remove
-    $linesToRemove = @("127.0.0.1 sessionserver.mojang.com", "127.0.0.1 authserver.mojang.com")
+    $linesToRemove = @("127.0.0.1 sessionserver.mojang.com", "127.0.0.1 authserver.mojang.com", "127.0.0.1 launchermeta.mojang.com")
 
     # Remove lines from the hosts file
     if (!(Remove-HostsLines -path $hostsFilePath -linesToRemove $linesToRemove)) {
