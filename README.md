@@ -32,7 +32,7 @@ If you're facing any issues with this script, you can fix the problem manually b
    3. x.x.x.x launchermeta.mojang.com
       <br>
       **The x.x.x.x could be any ip, commonly 127.0.0.1, if not, it could be a virus** <br>
-      **/!\ Delete any other lines that countain the word "Mojang" or "Minecraft"**
+      **/!\ Delete any other lines that contains the word "Mojang" or "Minecraft"**
 5. Once you've found them, make sure to delete them.
 **MAKE SURE TO SAVE THE FILE AND RESTART YOUR COMPUTER FOR THE CHANGES TO TAKE PLACE**
 
