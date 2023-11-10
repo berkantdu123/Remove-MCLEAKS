@@ -26,6 +26,9 @@ function Remove-HostsLines {
         $modifiedContent | Set-Content $path
 
         Write-Host "Hosts file modified successfully."
+
+        & ipconfig /flushdns
+        Write-Host "IpConfig sucessfully flushed."
     }
     catch {
         Write-Host "Failed to modify the hosts file: $_"
@@ -55,7 +58,10 @@ try {
     if (!(Remove-HostsLines -path $hostsFilePath -pattern $pattern)) {
         throw "Failed to remove lines from the hosts file."
     }
-
+    $userResponse = Read-Host "Do you want to restart your computer now to save changes? Make sure to save to save your work before restarting. (y/n)"
+    if ($userResponse -eq "y" -or $userResponse -eq "Y") {
+        Restart-Computer -Force
+    }
     Write-Host "Script executed successfully."
 }
 catch {
