@@ -58,7 +58,7 @@ try {
     if (!(Remove-HostsLines -path $hostsFilePath -pattern $pattern)) {
         throw "Failed to remove lines from the hosts file."
     }
-    $userResponse = Read-Host "Do you want to restart your computer now to save changes? Make sure to save to save your work before restarting. (y/n)"
+    $userResponse = Read-Host "Do you want to restart your computer now for best compatibility? Although not required this may improve the success rate, make sure to save your work before. (y/n)"
     if ($userResponse -eq "y" -or $userResponse -eq "Y") {
         Restart-Computer -Force
     }
