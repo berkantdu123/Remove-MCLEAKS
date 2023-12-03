@@ -3,7 +3,9 @@
 ## This is made for Fire's Discord by [@Hectarox](https://discord.com/users/595285763613130759)
 
 [![Join us on Discord](https://invidget.switchblade.xyz/mcalts?theme=dark)](https://discord.gg/mcalts)
-## Explanation
+
+# Explanation
+
 This script reverts any modification made by MCLeaks/EasyMC. We've had many complains of players who could not log into Microsoft/Mojang accounts after using MCLeaks/EasyMC and got the error:
 
 **"Failed to login: The authentification servers are currently down for maintenance"**
